@@ -1,0 +1,19 @@
+{
+  "name": "telegram-bot-svelte",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "telegram-bot"
+  ],
+  "dependencies": {
+    "prettier": "^3.3.2"
+  }
+}
