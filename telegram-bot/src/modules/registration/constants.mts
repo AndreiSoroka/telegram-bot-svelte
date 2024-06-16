@@ -11,10 +11,7 @@ export const registrationButtons = new InlineKeyboard()
   .text("Yes", actionLinkYes)
   .text("No", actionLinkNo);
 
-/**
- * @todo: Add web app link
- */
 export const webAppButtons = new InlineKeyboard().webApp(
   "Open web app",
-  "https://revenkroz.github.io/telegram-web-app-bot-example/index.html",
+  process.env.WEB_APP_URL,
 );
