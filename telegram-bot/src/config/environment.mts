@@ -8,6 +8,7 @@ export const environmentSchema = z.object({
   TELEGRAM_BOT_TOKEN: z.string(),
   PORT: z.string().optional(),
   PWD: z.string(),
+  WEB_APP_URL: z.string(),
   ADMINS: z
     .string()
     .refine((value) => value.split(",").every((id) => /^\d+$/.test(id))),

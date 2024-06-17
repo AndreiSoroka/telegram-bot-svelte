@@ -3,10 +3,3 @@
 
 ### Node
 node_modules
-
-### Environment
-.env.local
-.env.*.local
-
-### Ohter
-.*

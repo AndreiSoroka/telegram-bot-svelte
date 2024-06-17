@@ -1,5 +1,5 @@
 {
-  "name": "telegram-bot-svelte",
+  "name": "telegram-bot-web-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "telegram-bot"
+    "telegram-bot",
+    "web-app"
   ],
   "dependencies": {
     "prettier": "^3.3.2"

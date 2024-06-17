@@ -1,0 +1,6 @@
+### Environment
+.env.local
+.env.*.local
+
+### Temp files
+.temp
