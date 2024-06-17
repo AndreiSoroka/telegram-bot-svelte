@@ -12,6 +12,6 @@ export const registrationButtons = new InlineKeyboard()
   .text("No", actionLinkNo);
 
 export const webAppButtons = new InlineKeyboard().webApp(
-  "Open web app",
-  process.env.WEB_APP_URL,
+  "Open web app" + process.env.WEB_APP_URL + "/greetings",
+  process.env.WEB_APP_URL + "/greetings",
 );
