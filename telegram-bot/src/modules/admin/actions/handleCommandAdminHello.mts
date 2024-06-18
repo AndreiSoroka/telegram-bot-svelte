@@ -20,7 +20,7 @@ export async function handleCommandAdminHello(ctx: CommandContext<BotContext>) {
 
   const [rawUserIds, ...messageFragments] = ctx.match.split(" ");
 
-  // todo mode to utils
+  // todo move to utils
   const userIds = userIdsSchema.safeParse(rawUserIds.split(","));
   if (!userIds.success) {
     await ctx.reply(
@@ -34,7 +34,7 @@ export async function handleCommandAdminHello(ctx: CommandContext<BotContext>) {
     return;
   }
 
-  // todo mode to utils
+  // todo move to utils
   const message = messageFragments.join(" ").trim();
   if (!message) {
     await ctx.reply(
@@ -44,7 +44,7 @@ export async function handleCommandAdminHello(ctx: CommandContext<BotContext>) {
     return;
   }
 
-  // todo mode to utils
+  // todo move to utils
   const relevantUserIds = await Promise.all(
     userIds.data.map(async (id) => {
       return {

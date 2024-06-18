@@ -9,6 +9,7 @@ export const environmentSchema = z.object({
   PORT: z.string().optional(),
   PWD: z.string(),
   WEB_APP_URL: z.string(),
+  DB_PATH: z.string(),
   ADMINS: z
     .string()
     .refine((value) => value.split(",").every((id) => /^\d+$/.test(id))),

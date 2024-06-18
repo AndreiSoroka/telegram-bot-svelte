@@ -7,7 +7,11 @@ const currentWorkingDirectory = process.cwd();
 
 const options: DataSourceOptions = {
   type: "sqlite",
-  database: path.join(currentWorkingDirectory, "./.temp/database.sqlite"),
+  database: path.join(
+    currentWorkingDirectory,
+    process.env.DB_PATH,
+    "/database.sqlite",
+  ),
   synchronize: process.env.NODE_ENV === "development",
   logging: true,
   entities: [UserEntity],
