@@ -1,7 +1,7 @@
 import type { BotContext } from "../../../config/types/BotContext.js";
 
 import type { CommandContext } from "grammy";
-import { SessionController } from "../../../libs/session/SessionController.mjs";
+
 import {
   commandAdminHello,
   commandAdminUserList,

@@ -11,5 +11,5 @@ const name = user?.first_name || user?.last_name || "stranger";
 if (isTelegram) {
   patch(document.body, greetingComponent(name));
 } else {
-  patch(document.body, linkToTheBotComponent("TestAssignmentBot."));
+  patch(document.body, linkToTheBotComponent("TestAssignmentBot"));
 }
