@@ -9,7 +9,13 @@ export const environmentSchema = z.object({
   PORT: z.string().optional(),
   PWD: z.string(),
   WEB_APP_URL: z.string(),
-  DB_PATH: z.string(),
+  DATABASE_TYPE: z.union([z.literal("mysql"), z.literal("sqlite")]),
+  SQLITE_PATH: z.string().optional(),
+  MYSQL_HOST: z.string().optional(),
+  MYSQL_PORT: z.string().optional(),
+  MYSQL_USER: z.string().optional(),
+  MYSQL_PASSWORD: z.string().optional(),
+  MYSQL_DATABASE: z.string().optional(),
   ADMINS: z
     .string()
     .refine((value) => value.split(",").every((id) => /^\d+$/.test(id))),

@@ -1,20 +1,28 @@
 import { DataSource } from "typeorm";
 import { UserEntity } from "./entities/UserEntity.mjs";
-import path from "node:path";
 import type { DataSourceOptions } from "typeorm";
+import { getMySQLOptions } from "./config/mysql.mjs";
+import { getSQLiteOptions } from "./config/sqlite.mjs";
 
-const currentWorkingDirectory = process.cwd();
+const isDev = process.env.NODE_ENV === "development";
 
-const options: DataSourceOptions = {
-  type: "sqlite",
-  database: path.join(
-    currentWorkingDirectory,
-    process.env.DB_PATH,
-    "/database.sqlite",
-  ),
-  synchronize: process.env.NODE_ENV === "development",
-  logging: true,
-  entities: [UserEntity],
-};
+function getDataSourceOptions(): DataSourceOptions {
+  const options = {
+    entities: [UserEntity],
+    synchronize: isDev,
+    logging: isDev,
+  };
 
-export const appDataSource = new DataSource(options).initialize();
+  switch (process.env.DATABASE_TYPE) {
+    case "mysql":
+      return getMySQLOptions(options);
+    case "sqlite":
+      return getSQLiteOptions(options);
+    default:
+      throw new Error("Please provide the database type in the environment");
+  }
+}
+
+export const appDataSource = new DataSource(
+  getDataSourceOptions(),
+).initialize();

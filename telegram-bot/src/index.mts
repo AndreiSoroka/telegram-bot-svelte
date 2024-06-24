@@ -24,9 +24,10 @@ await Promise.all([
   }),
 ]).catch((error) => console.error(error));
 
-await bot
-  .start()
-  .then(() => {
-    console.log("Bot started");
+bot
+  .start({
+    allowed_updates: ["message", "callback_query"],
+    limit: 10,
+    drop_pending_updates: true, // because it is just a test bot
   })
   .catch((error) => console.error(error));
