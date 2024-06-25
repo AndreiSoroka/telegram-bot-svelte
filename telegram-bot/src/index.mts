@@ -5,6 +5,7 @@ import { appDataSource } from "./database/index.mjs";
 import { modules, myCommands } from "./modules/index.mjs";
 import type { BotContext } from "./config/types/BotContext.js";
 import { sessionMiddleware } from "./middlewares/index.mjs";
+import http from "node:http";
 
 const bot = new Bot<BotContext>(process.env.TELEGRAM_BOT_TOKEN);
 
@@ -31,3 +32,11 @@ bot
     drop_pending_updates: true, // because it is just a test bot
   })
   .catch((error) => console.error(error));
+
+if (process.env.TURN_ON_HTTP_SERVER) {
+  const app = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end("Telegram bot is running!");
+  });
+  app.listen();
+}

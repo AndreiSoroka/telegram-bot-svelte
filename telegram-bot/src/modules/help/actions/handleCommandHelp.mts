@@ -23,7 +23,7 @@ export async function handleCommandHelp(ctx: CommandContext<BotContext>) {
         ? ["️❗️Use /adminhelp to see admin commands"]
         : []),
       "",
-      "[GitHub Repository](https://github.com/AndreiSoroka/telegram\\-bot\\-svelte)",
+      "[GitHub Repository](https://github.com/AndreiSoroka/telegram\\-bot\\-web\\-app)",
     ].join("\n"),
     {
       parse_mode: "MarkdownV2",

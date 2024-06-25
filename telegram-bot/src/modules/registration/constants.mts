@@ -11,10 +11,6 @@ export const registrationButtons = new InlineKeyboard()
   .text("Yes", actionLinkYes)
   .text("No", actionLinkNo);
 
-/**
- * @todo: Add web app link
- */
-export const webAppButtons = new InlineKeyboard().webApp(
-  "Open web app",
-  process.env.WEB_APP_URL,
-);
+export const webAppButtons = process.env.WEB_APP_URL
+  ? new InlineKeyboard().webApp("Open web app", process.env.WEB_APP_URL)
+  : undefined;

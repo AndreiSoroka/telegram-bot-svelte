@@ -7,7 +7,7 @@ Demo: https://t.me/TestAssignmentBot
 This repository consists of two main projects:
 
 1. **Telegram Bot** - node.js application that interacts with the Telegram API.
-2. **Web App** – generate static files for the web app.
+2. **Web App** – generate static files for the Web App.
 
 ---
 
@@ -23,49 +23,102 @@ npm install
 
 ## Telegram Bot
 
-### Environment Configuration
+### 🔥 Fast Start
 
-To configure the Telegram bot, create a `./telegram-bot/.env.local` file with the following contents:
+You can register a new bot using BotFather: https://t.me/botfather
 
-- `TELEGRAM_BOT_TOKEN`: Obtain this token from [BotFather]( https://t.me/BotFather) on Telegram.
-- `ADMINS`: List of admin IDs separated by commas.
-- `DB_PATH`: Path to the database.
-- `WEB_APP_URL`: The URL of the **web app** used to generate links in the bot's messages.
-
-You can find an example of the `.env` file in the following location:
-[./telegram-bot/.env](telegram-bot%2F.env)
-
-### Running the Bot
-
-1. Make `.env.local` file with the appropriate values.
-2. Start the bot using the following command:
-   ```bash
-   npm start -w telegram-bot
-   ```
-
-## Web App
-
-### Building and Serving the Web App
-
-1. Build the static files using the following command:
-   ```bash
-    npm run build -w web-app
-    ``` 
-2. Will generate the static files in the `./web-app/dist/` directory.
-3. Deploy the generated static files to any server and provide the URL for access.
-
-### Running the Web App Locally
-
-For local development,
-you can build and serve the app using [serve](https://www.npmjs.com/package/serve)
-and [ngrok](https://ngrok.com/):
-
+To start the bot, you need to provide the following environment variables:
 ```bash
-npm run serve -w web-app
+TELEGRAM_BOT_TOKEN="<telegram-token>" ADMINS="<telegram-id>" npm start -w telegram-bot
+```
+
+Or, to configure the Telegram bot before starting it,
+create a `./telegram-bot/.env.local` file with the following contents:
+```dotenv
+### File: ./telegram-bot/.env.local
+
+TELEGRAM_BOT_TOKEN=<telegram-token>
+ADMINS=<telegram-id>
+```
+Then, run the bot using the following command:
+```bash
+npm start -w telegram-bot
+```
+
+🚀 Now your bot is running and ready to accept commands.
+
+### 🧩 Full Configuration for local development
+
+For local development, you need to install
+[serve](https://www.npmjs.com/package/serve)
+and [ngrok](https://ngrok.com/).
+
+```dotenv
+### File: ./web-app/.env.local
+
+TELEGRAM_BOT_NAME=<telegram-bot-name>
+```
+To start the `web-app`, run the following commands:
+```bash
+npm run build -w web-app
 serve ./web-app/dist
 ngrok http http://localhost:3000/
 ```
 
----
+From ngrok, copy the URL and paste it into the `WEB_APP_URL` environment variable in the `./telegram-bot/.env.local` file.
+The link should look like `https://<your-ngrok-id>.ngrok.io`.
 
-// TODO add more details
+
+To start the bot, you need to provide the following environment variables:
+```dotenv
+### File: ./telegram-bot/.env.local
+
+TELEGRAM_BOT_TOKEN=<telegram-token>
+ADMINS=<telegram-id>[,<telegram-id>,...]
+SQLITE_PATH=.temp/database/path/
+WEB_APP_URL=https://<your-ngrok-id>.ngrok.io
+```
+```bash
+npm start -w telegram-bot
+```
+
+### 📝 Deployment (cPanel example)
+
+> **Note:** Why do I deploy to **cPanel**? I just have cheap hosting for many years.
+ 
+
+1. Configure environment variables for the Telegram bot in the `./telegram-bot/.env.production.local` file or in the **cPanel** environment variables.
+   ```dotenv
+    ### File: ./telegram-bot/.env.production.local
+
+    TELEGRAM_BOT_TOKEN=<telegram-token>
+    ADMINS=<telegram-id>[,<telegram-id>,...]
+    WEB_APP_URL=https://<your-server>/
+    DATABASE_TYPE=mysql
+    MYSQL_HOST=localhost
+    MYSQL_PORT=3306
+    MYSQL_USER=<mysql-user>
+    MYSQL_PASSWORD=<mysql-password># 🥲
+    MYSQL_DATABASE=<mysql-database>
+    TURN_ON_HTTP_SERVER=yes# cPanel specific
+    ```
+2. Configure environment variables for the `web-app` in the `./web-app/.env.production.local` file.
+   ```dotenv
+    ### File: ./web-app/.env.production.local
+
+    TELEGRAM_BOT_NAME=<telegram-bot-name>
+    ```
+3. Build the `telegram-bot` and `web-app`
+   ```bash
+   npm run build --workspaces
+   # or 
+   # npm run build -w telegram-bot
+   # npm run build -w web-app
+   ```
+4. Create cPanel ESM starter script (*cPanel specific*)
+   ```javascript
+   // File: ./telegram-bot/dist/index.cjs
+
+   import('index.mjs')
+   ```
+5. Upload the `./telegram-bot/dist` and `./web-app/dist` directories to the server.
