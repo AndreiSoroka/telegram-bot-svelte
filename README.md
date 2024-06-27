@@ -1,4 +1,34 @@
-Demo: https://t.me/TestAssignmentBot
+🌐 Demo: https://t.me/TestAssignmentBot
+
+# Technologies list:
+- **Telegram Bot:**
+  - Node.js
+  - TypeScript
+  - Grammy
+  - TypeORM/SQLite/MySQL
+  - Zod
+  - tsx & pkgroll
+- **Web App:**
+  - Rollup
+  - TypeScript
+  - Snabbdom
+
+<details>
+  <summary>Few words about the project (click)</summary>
+  The last time I created a bot was back in 2018.
+  The bot used to read chats, and if someone typed “!Friday”,
+  it would send a random video.
+  As an Easter egg, I’ve added a similar command in memory of that first bot.
+  
+  Overall, I was very excited to work on this test assignment.
+  It was a stroke of luck because I had been planning
+  to integrate a bot for one of my projects and needed to delve deeper into it.
+  Naturally, I ended up spending more time on it than initially planned.
+  
+  I can say that Telegram has changed significantly over these six years.
+  Additionally, I finally got a chance to try Rollup directly and Snabbdom.
+  I had wanted to for a long time, but never had a reason until now.
+</details>
 
 ---
 
