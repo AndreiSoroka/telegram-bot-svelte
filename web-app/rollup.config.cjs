@@ -12,6 +12,7 @@ module.exports = {
   output: {
     dir: "dist",
     format: "esm",
+    entryFileNames: "[name].[hash].js",
   },
   plugins: [
     htmlTemplate({
