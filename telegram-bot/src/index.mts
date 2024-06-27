@@ -16,6 +16,12 @@ bot.use(sessionMiddleware);
 
 // modules
 bot.use(modules);
+// out of modules
+bot.on("message", (ctx) =>
+  ctx.reply(
+    ["Unknown command", "Write /help to see available commands"].join("\n"),
+  ),
+);
 
 // boot app
 await Promise.all([
