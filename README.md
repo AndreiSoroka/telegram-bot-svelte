@@ -1,8 +1,5 @@
 Demo: https://t.me/TestAssignmentBot
 
-If bot is not responding, please try to run it using the following link:
-https://telegram-bot.andreisoroka.com/run-bot
-
 ---
 
 # Test Assignment
@@ -12,20 +9,15 @@ https://telegram-bot.andreisoroka.com/run-bot
 > ### Requirements:
 >
 > 1. `/start` Command:
->
-> - The bot should have a `/start` command that sends a message with a web app button.
-> - The button should open a website displaying the user’s Telegram first name (e.g., “Hello, !”).
->
+>   - The bot should have a `/start` command that sends a message with a web app button.
+>   - The button should open a website displaying the user’s Telegram first name (e.g., “Hello, !”).
 > 2. Database Integration:
->
-> - The bot should save the users of the bot in a database (SQLite or PostgreSQL).
->
+>   - The bot should save the users of the bot in a database (SQLite or PostgreSQL).
 > 3. Admin Command:
->
-> - The bot should have an `/adminhello <telegram_id> <text>` command that only certain Telegram users can use.
-> - Example usage: `/adminhello 274139721 Hello from admin!`
-> - This command should send a message from the bot, “Hello from admin!” to the user with a Telegram ID of 274139721.
-> - Admin users can get user IDs directly from the database. Admins can be hardcoded.
+>   - The bot should have an `/adminhello <telegram_id> <text>` command that only certain Telegram users can use.
+>   - Example usage: `/adminhello 274139721 Hello from admin!`
+>   - This command should send a message from the bot, “Hello from admin!” to the user with a Telegram ID of 274139721.
+>   - Admin users can get user IDs directly from the database. Admins can be hardcoded.
 
 ---
 
@@ -116,7 +108,7 @@ WEB_APP_URL=https://<your-ngrok-id>.ngrok.io
 npm start -w telegram-bot
 ```
 
-### 📝 Deployment (cPanel example)
+### 📝 Deployment to production (cPanel example)
 
 > **Note:** Why do I deploy to **cPanel**? I just have cheap hosting for many years.
 
@@ -127,14 +119,18 @@ npm start -w telegram-bot
 
     TELEGRAM_BOT_TOKEN=<telegram-token>
     ADMINS=<telegram-id>[,<telegram-id>,...]
-    WEB_APP_URL=https://<your-server>/
+    ### Database settings:
     DATABASE_TYPE=mysql
     MYSQL_HOST=localhost
     MYSQL_PORT=3306
     MYSQL_USER=<mysql-user>
     MYSQL_PASSWORD=<mysql-password># 🥲
     MYSQL_DATABASE=<mysql-database>
-    TURN_ON_HTTP_SERVER=yes# cPanel specific
+    ### Webhook settings:
+    WEBHOOK_BASE_URL=https://<your-server>/
+    WEBHOOK_PATH=/webhook
+    ### Web App settings:
+    WEB_APP_URL=https://<your-server>/
    ```
 
 2. Configure environment variables for the `web-app` in the `./web-app/.env.production.local` file.

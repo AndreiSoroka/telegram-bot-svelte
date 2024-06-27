@@ -5,7 +5,9 @@ import { appDataSource } from "./database/index.mjs";
 import { modules, myCommands } from "./modules/index.mjs";
 import type { BotContext } from "./config/types/BotContext.js";
 import { sessionMiddleware } from "./middlewares/index.mjs";
-import http from "node:http";
+import { initializeWebhook } from "./libs/telegram/initializeWebhook.mjs";
+import { initializePolling } from "./libs/telegram/initializePolling.mjs";
+import { normalizePort } from "./libs/server/normalizePort.mjs";
 
 const bot = new Bot<BotContext>(process.env.TELEGRAM_BOT_TOKEN);
 
@@ -25,18 +27,15 @@ await Promise.all([
   }),
 ]).catch((error) => console.error(error));
 
-bot
-  .start({
-    allowed_updates: ["message", "callback_query"],
-    limit: 10,
-    drop_pending_updates: true, // because it is just a test bot
-  })
-  .catch((error) => console.error(error));
-
-if (process.env.TURN_ON_HTTP_SERVER) {
-  const app = http.createServer((req, res) => {
-    res.writeHead(200);
-    res.end("Telegram bot is running!");
-  });
-  app.listen();
+if (process.env.WEBHOOK_BASE_URL) {
+  await initializeWebhook(
+    bot,
+    process.env.WEBHOOK_BASE_URL,
+    process.env.WEBHOOK_PATH,
+    normalizePort(process.env.WEBHOOK_HTTP_SERVER_PORT),
+  );
+  console.log("Webhook initialized");
+} else {
+  await initializePolling(bot);
+  console.log("Polling initialized");
 }

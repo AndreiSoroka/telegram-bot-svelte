@@ -16,7 +16,9 @@ export const environmentSchema = z.object({
   MYSQL_USER: z.string().optional(),
   MYSQL_PASSWORD: z.string().optional(),
   MYSQL_DATABASE: z.string().optional(),
-  TURN_ON_HTTP_SERVER: z.union([z.literal("yes"), z.literal("")]),
+  WEBHOOK_BASE_URL: z.string().optional(),
+  WEBHOOK_PATH: z.string().optional(),
+  WEBHOOK_HTTP_SERVER_PORT: z.string().optional(),
   ADMINS: z
     .string()
     .refine((value) => value.split(",").every((id) => /^\d+$/.test(id))),
